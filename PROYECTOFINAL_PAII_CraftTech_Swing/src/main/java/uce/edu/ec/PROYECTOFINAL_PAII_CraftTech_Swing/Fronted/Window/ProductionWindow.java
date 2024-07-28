@@ -114,6 +114,306 @@ public class ProductionWindow extends JFrame {
                 addStepButton(panel, "Finish wood for walls", 20);
                 addStepButton(panel, "Inspect and adjust", 15);
                 break;
+            case "side table":
+                addStepButton(panel, "Cut wood for tabletop", 15);
+                addStepButton(panel, "Cut wood for legs", 15);
+                addStepButton(panel, "Assemble tabletop and legs", 20);
+                addStepButton(panel, "Sand wood surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "bookcase":
+                addStepButton(panel, "Cut wood for shelves", 20);
+                addStepButton(panel, "Cut wood for sides and back", 20);
+                addStepButton(panel, "Assemble shelves and sides", 25);
+                addStepButton(panel, "Sand all wood surfaces", 20);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "cabinet":
+                addStepButton(panel, "Cut wood for cabinet panels", 20);
+                addStepButton(panel, "Cut wood for doors and shelves", 20);
+                addStepButton(panel, "Assemble cabinet structure", 30);
+                addStepButton(panel, "Sand wood surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "dresser":
+                addStepButton(panel, "Cut wood for drawers and frame", 25);
+                addStepButton(panel, "Assemble drawers and frame", 30);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "stool":
+                addStepButton(panel, "Cut wood for seat and legs", 15);
+                addStepButton(panel, "Assemble seat and legs", 20);
+                addStepButton(panel, "Sand wood surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "shelf":
+                addStepButton(panel, "Cut wood for shelf boards", 15);
+                addStepButton(panel, "Cut wood for brackets", 15);
+                addStepButton(panel, "Assemble shelf and brackets", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "door":
+                addStepButton(panel, "Cut wood for door panel", 20);
+                addStepButton(panel, "Cut wood for door frame", 20);
+                addStepButton(panel, "Assemble door panel and frame", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "mirror frame":
+                addStepButton(panel, "Cut wood for frame pieces", 15);
+                addStepButton(panel, "Assemble frame pieces", 20);
+                addStepButton(panel, "Sand wood surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "plant stand":
+                addStepButton(panel, "Cut wood for base and shelves", 15);
+                addStepButton(panel, "Cut wood for legs", 15);
+                addStepButton(panel, "Assemble base, shelves, and legs", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "drawer organizer":
+                addStepButton(panel, "Cut wood for dividers and base", 10);
+                addStepButton(panel, "Assemble dividers and base", 15);
+                addStepButton(panel, "Sand all surfaces", 10);
+                addStepButton(panel, "Finish wood", 10);
+                addStepButton(panel, "Inspect and adjust", 10);
+                break;
+            case "wine rack":
+                addStepButton(panel, "Cut wood for rack components", 20);
+                addStepButton(panel, "Assemble rack components", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "chest":
+                addStepButton(panel, "Cut wood for panels and lid", 25);
+                addStepButton(panel, "Assemble panels and lid", 30);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "hall tree":
+                addStepButton(panel, "Cut wood for frame and hooks", 20);
+                addStepButton(panel, "Assemble frame and hooks", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "toy chest":
+                addStepButton(panel, "Cut wood for panels and lid", 20);
+                addStepButton(panel, "Assemble panels and lid", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "bar stool":
+                addStepButton(panel, "Cut wood for seat and legs", 20);
+                addStepButton(panel, "Assemble seat and legs", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "coffee table":
+                addStepButton(panel, "Cut wood for tabletop and legs", 20);
+                addStepButton(panel, "Assemble tabletop and legs", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "storage bench":
+                addStepButton(panel, "Cut wood for seat and storage compartments", 25);
+                addStepButton(panel, "Assemble seat and compartments", 30);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "footstool":
+                addStepButton(panel, "Cut wood for seat and legs", 15);
+                addStepButton(panel, "Assemble seat and legs", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "kitchen island":
+                addStepButton(panel, "Cut wood for countertop and base", 30);
+                addStepButton(panel, "Assemble countertop and base", 35);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "potting bench":
+                addStepButton(panel, "Cut wood for work surface and legs", 20);
+                addStepButton(panel, "Assemble work surface and legs", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "picture frame":
+                addStepButton(panel, "Cut wood for frame pieces", 15);
+                addStepButton(panel, "Assemble frame pieces", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "wall shelf":
+                addStepButton(panel, "Cut wood for shelf board and brackets", 15);
+                addStepButton(panel, "Assemble shelf board and brackets", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "guitar stand":
+                addStepButton(panel, "Cut wood for stand components", 20);
+                addStepButton(panel, "Assemble stand components", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "trellis":
+                addStepButton(panel, "Cut wood for trellis panels", 20);
+                addStepButton(panel, "Assemble trellis panels", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "crib":
+                addStepButton(panel, "Cut wood for crib sides and base", 25);
+                addStepButton(panel, "Assemble crib sides and base", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "changing table":
+                addStepButton(panel, "Cut wood for tabletop and shelves", 25);
+                addStepButton(panel, "Assemble tabletop and shelves", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "hanging rack":
+                addStepButton(panel, "Cut wood for rack components", 15);
+                addStepButton(panel, "Assemble rack components", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "bedside table":
+                addStepButton(panel, "Cut wood for tabletop and drawer", 20);
+                addStepButton(panel, "Assemble tabletop and drawer", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "game table":
+                addStepButton(panel, "Cut wood for tabletop and legs", 25);
+                addStepButton(panel, "Assemble tabletop and legs", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "spice rack":
+                addStepButton(panel, "Cut wood for rack components", 15);
+                addStepButton(panel, "Assemble rack components", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "letter holder":
+                addStepButton(panel, "Cut wood for holder components", 10);
+                addStepButton(panel, "Assemble holder components", 15);
+                addStepButton(panel, "Sand all surfaces", 10);
+                addStepButton(panel, "Finish wood", 10);
+                addStepButton(panel, "Inspect and adjust", 10);
+                break;
+            case "step stool":
+                addStepButton(panel, "Cut wood for steps and frame", 20);
+                addStepButton(panel, "Assemble steps and frame", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "wine cabinet":
+                addStepButton(panel, "Cut wood for cabinet panels and shelves", 25);
+                addStepButton(panel, "Assemble panels and shelves", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "barbecue table":
+                addStepButton(panel, "Cut wood for tabletop and legs", 30);
+                addStepButton(panel, "Assemble tabletop and legs", 35);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "mudroom bench":
+                addStepButton(panel, "Cut wood for seat and storage compartments", 25);
+                addStepButton(panel, "Assemble seat and compartments", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "pet bed":
+                addStepButton(panel, "Cut wood for bed frame", 20);
+                addStepButton(panel, "Assemble bed frame", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "ottoman":
+                addStepButton(panel, "Cut wood for base and legs", 20);
+                addStepButton(panel, "Assemble base and legs", 25);
+                addStepButton(panel, "Sand all surfaces", 20);
+                addStepButton(panel, "Finish wood", 25);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "bathroom shelf":
+                addStepButton(panel, "Cut wood for shelf board and brackets", 15);
+                addStepButton(panel, "Assemble shelf board and brackets", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "letter rack":
+                addStepButton(panel, "Cut wood for rack components", 10);
+                addStepButton(panel, "Assemble rack components", 15);
+                addStepButton(panel, "Sand all surfaces", 10);
+                addStepButton(panel, "Finish wood", 10);
+                addStepButton(panel, "Inspect and adjust", 10);
+                break;
+            case "card catalog":
+                addStepButton(panel, "Cut wood for catalog panels and drawers", 25);
+                addStepButton(panel, "Assemble panels and drawers", 30);
+                addStepButton(panel, "Sand all surfaces", 25);
+                addStepButton(panel, "Finish wood", 30);
+                addStepButton(panel, "Inspect and adjust", 20);
+                break;
+            case "tool rack":
+                addStepButton(panel, "Cut wood for rack components", 15);
+                addStepButton(panel, "Assemble rack components", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
+            case "lamp stand":
+                addStepButton(panel, "Cut wood for stand components", 15);
+                addStepButton(panel, "Assemble stand components", 20);
+                addStepButton(panel, "Sand all surfaces", 15);
+                addStepButton(panel, "Finish wood", 20);
+                addStepButton(panel, "Inspect and adjust", 15);
+                break;
             default:
                 JOptionPane.showMessageDialog(this, "Unknown product type.");
                 return;
