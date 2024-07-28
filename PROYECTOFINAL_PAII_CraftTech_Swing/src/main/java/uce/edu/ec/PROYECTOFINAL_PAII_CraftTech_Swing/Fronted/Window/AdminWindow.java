@@ -14,6 +14,7 @@ import com.google.gson.JsonParser;
 import uce.edu.ec.PROYECTOFINAL_PAII_CraftTech_Swing.Fronted.Form.MaterialForm;
 import uce.edu.ec.PROYECTOFINAL_PAII_CraftTech_Swing.Fronted.Form.ProductForm;
 import uce.edu.ec.PROYECTOFINAL_PAII_CraftTech_Swing.Fronted.Login.LoginForm;
+import uce.edu.ec.PROYECTOFINAL_PAII_CraftTech_Swing.Fronted.model.MusicPlayer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminWindow extends JFrame {
 
@@ -42,6 +45,9 @@ public class AdminWindow extends JFrame {
     private JButton createMaterialButton;
     private JButton createProductButton;
     private JButton refreshButton;
+    private JButton playMusicButton;
+    private MusicPlayer musicPlayer;
+    private ExecutorService executorService;
 
     public AdminWindow() {
         try {
@@ -49,6 +55,9 @@ public class AdminWindow extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+
+        executorService = Executors.newFixedThreadPool(2); // Configurar un pool de hilos
+        musicPlayer = new MusicPlayer();
 
         initUI();
         fetchOrdersFromServer();
@@ -97,6 +106,10 @@ public class AdminWindow extends JFrame {
         refreshButton.addActionListener(e -> fetchOrdersFromServer());
         buttonPanel.add(refreshButton);
 
+        playMusicButton = createButton("Play Music", BLUE_COLOR); // Ajusta el color si es necesario
+        playMusicButton.addActionListener(e -> playMusic());
+        buttonPanel.add(playMusicButton);
+
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
@@ -114,55 +127,61 @@ public class AdminWindow extends JFrame {
     }
 
     private void fetchOrdersFromServer() {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/orders")).GET().build();
+        executorService.submit(() -> {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/orders")).GET().build();
 
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            try {
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
-                List<List<Object>> inProcessData = new ArrayList<>();
-                List<List<Object>> completedData = new ArrayList<>();
+                if (response.statusCode() == 200) {
+                    List<List<Object>> inProcessData = new ArrayList<>();
+                    List<List<Object>> completedData = new ArrayList<>();
 
-                JsonArray jsonArray = JsonParser.parseString(response.body()).getAsJsonArray();
+                    JsonArray jsonArray = JsonParser.parseString(response.body()).getAsJsonArray();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                for (JsonElement element : jsonArray) {
-                    JsonObject jsonObject = element.getAsJsonObject();
-                    List<Object> row = new ArrayList<>();
+                    for (JsonElement element : jsonArray) {
+                        JsonObject jsonObject = element.getAsJsonObject();
+                        List<Object> row = new ArrayList<>();
 
-                    row.add(jsonObject.has("id") && !jsonObject.get("id").isJsonNull() ? jsonObject.get("id").getAsLong() : null);
-                    row.add(jsonObject.has("productName") && !jsonObject.get("productName").isJsonNull() ? jsonObject.get("productName").getAsString() : "N/A");
-                    row.add(jsonObject.has("userId") && !jsonObject.get("userId").isJsonNull() ? jsonObject.get("userId").getAsLong() : "N/A");
+                        row.add(jsonObject.has("id") && !jsonObject.get("id").isJsonNull() ? jsonObject.get("id").getAsLong() : null);
+                        row.add(jsonObject.has("productName") && !jsonObject.get("productName").isJsonNull() ? jsonObject.get("productName").getAsString() : "N/A");
+                        row.add(jsonObject.has("userId") && !jsonObject.get("userId").isJsonNull() ? jsonObject.get("userId").getAsLong() : "N/A");
 
-                    String dateString = jsonObject.has("orderDate") && !jsonObject.get("orderDate").isJsonNull() ? jsonObject.get("orderDate").getAsString() : "";
-                    try {
-                        Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(dateString);
-                        row.add(sdf.format(date));
-                    } catch (Exception e) {
-                        row.add("Invalid Date");
+                        String dateString = jsonObject.has("orderDate") && !jsonObject.get("orderDate").isJsonNull() ? jsonObject.get("orderDate").getAsString() : "";
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(dateString);
+                            row.add(sdf.format(date));
+                        } catch (Exception e) {
+                            row.add("Invalid Date");
+                        }
+
+                        row.add(jsonObject.has("status") && !jsonObject.get("status").isJsonNull() ? jsonObject.get("status").getAsString() : "Unknown");
+
+                        if ("COMPLETED".equals(jsonObject.get("status").getAsString())) {
+                            completedData.add(row);
+                        } else {
+                            inProcessData.add(row);
+                        }
                     }
 
-                    row.add(jsonObject.has("status") && !jsonObject.get("status").isJsonNull() ? jsonObject.get("status").getAsString() : "Unknown");
+                    SwingUtilities.invokeLater(() -> {
+                        updateTable(ordersTable, inProcessData);
+                        updateTable(completedOrdersTable, completedData);
+                    });
 
-                    if ("COMPLETED".equals(jsonObject.get("status").getAsString())) {
-                        completedData.add(row);
-                    } else {
-                        inProcessData.add(row);
-                    }
+                } else {
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, "Error fetching orders from the server."));
                 }
-
-                updateTable(ordersTable, inProcessData);
-                updateTable(completedOrdersTable, completedData);
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Error fetching orders from the server.");
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(this, "Error fetching orders: " + e.getMessage());
+                    e.printStackTrace();
+                });
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error fetching orders: " + e.getMessage());
-            e.printStackTrace();
-        }
+        });
     }
 
     private void updateTable(JTable table, List<List<Object>> data) {
@@ -206,34 +225,38 @@ public class AdminWindow extends JFrame {
     }
 
     private void fetchOrderDetails(Long id) {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/orders/" + id)).GET().build();
+        executorService.submit(() -> {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/orders/" + id)).GET().build();
 
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            try {
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
-                JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
+                if (response.statusCode() == 200) {
+                    JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
 
-                String product = jsonObject.has("productName") ? jsonObject.get("productName").getAsString() : "Unknown";
-                JsonArray stepsArray = jsonObject.has("steps") ? jsonObject.get("steps").getAsJsonArray() : new JsonArray();
-                List<String> steps = new ArrayList<>();
-                List<Integer> times = new ArrayList<>();
+                    String product = jsonObject.has("productName") ? jsonObject.get("productName").getAsString() : "Unknown";
+                    JsonArray stepsArray = jsonObject.has("steps") ? jsonObject.get("steps").getAsJsonArray() : new JsonArray();
+                    List<String> steps = new ArrayList<>();
+                    List<Integer> times = new ArrayList<>();
 
-                for (JsonElement stepElement : stepsArray) {
-                    JsonObject stepObject = stepElement.getAsJsonObject();
-                    steps.add(stepObject.get("stepName").getAsString());
-                    times.add(stepObject.get("duration").getAsInt());
+                    for (JsonElement stepElement : stepsArray) {
+                        JsonObject stepObject = stepElement.getAsJsonObject();
+                        steps.add(stepObject.get("stepName").getAsString());
+                        times.add(stepObject.get("duration").getAsInt());
+                    }
+
+                    SwingUtilities.invokeLater(() -> new ProductionWindow(id, product, steps, times));
+                } else {
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(this, "Error fetching order details."));
                 }
-
-                SwingUtilities.invokeLater(() -> new ProductionWindow(id, product, steps, times));
-            } else {
-                JOptionPane.showMessageDialog(this, "Error fetching order details.");
+            } catch (Exception e) {
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(this, "Error fetching order details: " + e.getMessage());
+                    e.printStackTrace();
+                });
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error fetching order details: " + e.getMessage());
-            e.printStackTrace();
-        }
+        });
     }
 
     private void showCreateMaterialPage() {
@@ -242,5 +265,9 @@ public class AdminWindow extends JFrame {
 
     private void showCreateProductPage() {
         SwingUtilities.invokeLater(() -> new ProductForm(this).setVisible(true));
+    }
+
+    private void playMusic() {
+        executorService.submit(() -> musicPlayer.play());
     }
 }
